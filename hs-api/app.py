@@ -4,8 +4,12 @@ import re
 import string
 from tensorflow import keras
 from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 
 def custom_standardization(input_data):
     """Clean and transform input data to lowercase
@@ -21,11 +25,11 @@ def custom_standardization(input_data):
     remove_amp = tf.strings.regex_replace(remove_puntuation, '&amp;', '')
     return tf.strings.regex_replace(remove_amp, 'http.+$', '')
 
+
 model = keras.models.load_model('../hate_speech_model',
                                 custom_objects={'TextVectorization': TextVectorization,
                                                 'custom_standardization': custom_standardization}
                                 )
-
 
 @app.route("/", methods=["POST"])
 def index():
