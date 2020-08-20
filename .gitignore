@@ -1,0 +1,6 @@
+obsolete/
+nigthly/
+.ipynb_checkpoints/
+hs-api/venv
+hs-api/__pycache__/
+hs-api/.idea/
