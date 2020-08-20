@@ -42,6 +42,7 @@
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function (is_hate_speech) {
+                            console.log("The response from the server is :" + is_hate_speech);
                             if (is_hate_speech) {
                                 $("#result").text("Your tweet is considered hate speech")
                             } else {

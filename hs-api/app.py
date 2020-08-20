@@ -35,6 +35,8 @@ model = keras.models.load_model('../hate_speech_model',
 def index():
     print("Request received")
     tweet = request.json
+    print("Tweet: " + tweet['tweet'])
     prediction = model.predict([str(tweet['tweet'])])
     hate_speech = prediction[0][0] > 0.5
+    print("Response:  " + str(hate_speech))
     return str(hate_speech)
