@@ -1,14 +1,13 @@
 from flask import Flask, request
-from tensorflow import keras
+from flask_cors import CORS
 
 app = Flask(__name__)
-model = keras.models.load_model('../my_model')
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route("/", methods=["POST"])
 def index():
     print("Request received")
     tweet = request.json
-    prediction = model.predict(tweet['tweet'])
-    hate_speech = prediction > 0.5
-    return hate_speech
+    print("Tweet is: " + str(tweet['tweet']))
+    return "true"
